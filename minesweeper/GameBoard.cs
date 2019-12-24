@@ -53,12 +53,16 @@ namespace minesweeper
         private void GenerateNewBoard()
         {
             Random r = new Random();
-            for(int n = 0; n < numberOfBombs; n++)
+            for(int n = 0; n < numberOfBombs;)
             {
                 int bombRow = r.Next(0, row);
                 int bombCol = r.Next(0, col);
-                gameGrid[bombRow][bombCol] = int.MinValue;
-                this.UpdateNeighbourBombCount(bombRow, bombCol);
+                if(gameGrid[bombRow][bombCol] != int.MinValue)
+                {
+                    gameGrid[bombRow][bombCol] = int.MinValue;
+                    this.UpdateNeighbourBombCount(bombRow, bombCol);
+                    n++;
+                }
             }
         }
 
